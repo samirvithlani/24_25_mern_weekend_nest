@@ -1,5 +1,6 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { UserService } from './user.service';
+import { CreateUserDto } from './create-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -17,8 +18,18 @@ export class UserController {
 
     @Get("/searchuser")
     searchUser(@Query('name')name:string,@Query("age") age:number):any{
-        console.log("called....")
-        console.log(name,age)
+       
         return this.userService.searchUser(name,age)
     }
+
+    @Post("/adduser")
+    createUser(@Body() body:any){
+        return {"message":"user created...",data:body}
+    }
+
+    @Post("/genuser")
+    generateUser(@Body()user:CreateUserDto){
+        return user;
+    }
+
 }
