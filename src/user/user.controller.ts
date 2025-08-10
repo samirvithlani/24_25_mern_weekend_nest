@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './create-user.dto';
+import { UpdateUserDto } from './update-user.dto';
 
 @Controller('user')
 export class UserController {
@@ -9,7 +10,7 @@ export class UserController {
 
     @Get("")
     findAllUsers():any{
-        return this.userService.getAllUsers()
+        return this.userService.getAllUsersFromdb()
     }
     @Get("/finduser/:id")
     findUserById(@Param('id') id:string):any{
@@ -27,9 +28,22 @@ export class UserController {
         return {"message":"user created...",data:body}
     }
 
+    // @Post("/genuser")
+    // generateUser(@Body()user:CreateUserDto){
+    //     return user;
+    // }
+
     @Post("/genuser")
     generateUser(@Body()user:CreateUserDto){
-        return user;
+        return this.userService.createUser(user)
     }
 
+    @Delete(":id")
+    deleteUser(@Param("id")id :string){
+        return this.userService.deleteById(id)
+    }
+    @Patch(":id")
+    async updateUser(@Param("id") id:string,@Body() data:UpdateUserDto){
+        return this.userService.updateByUd(id,data)
+    }
 }

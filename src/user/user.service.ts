@@ -1,7 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class UserService {
+
+    //model
+    constructor(@InjectModel("user") private userModel:Model<any>){}
+
+    async createUser(data:any):Promise<any>{
+        const user = new this.userModel(data)
+        return user.save()
+    }
+
+    async getAllUsersFromdb():Promise<any>{
+        return this.userModel.find()
+    }
 
     users:any=[
         {
@@ -49,6 +63,13 @@ export class UserService {
                 data:null
             }
         }
+    }
+
+    async deleteById(id:string):Promise<any>{
+        return this.userModel.findByIdAndDelete(id)
+    }
+    async updateByUd(id:string,data:any):Promise<any>{
+        return this.userModel.findByIdAndUpdate(id,data,{new:true})
     }
 
 }
