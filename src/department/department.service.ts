@@ -12,4 +12,8 @@ export class DepartmentService {
         const dept = new this.model(dto)
         return dept.save()
     }
+
+    getAllDepartment(){
+        return this.model.find({})
+    }
 }

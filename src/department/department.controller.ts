@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreateDepartmentDto } from './create-department.dto';
 import { DepartmentService } from './department.service';
 
@@ -11,5 +11,10 @@ export class DepartmentController {
         console.log("here....")
         console.log(dto)
         return this.deptservice.createDepartment(dto);
+    }
+
+    @Get()
+    getDepartments(){
+        return this.deptservice.getAllDepartment()
     }
 }
