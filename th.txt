@@ -4,3 +4,5 @@ nest new project-name
 nest g module user
 nest g controller user
 nest g service user
+
+npm i @nestjs/jwt  @nestjs/passport  passport passport-jwt bcrypt @types/bcrypt
