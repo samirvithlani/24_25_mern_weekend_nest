@@ -6,3 +6,8 @@ nest g controller user
 nest g service user
 
 npm i @nestjs/jwt  @nestjs/passport  passport passport-jwt bcrypt @types/bcrypt
+
+middleware:
+1)application-lvel-middleware
+2)route-specfic-middleware
+3)global middlware: app.use()

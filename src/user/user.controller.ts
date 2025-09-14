@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './create-user.dto';
 import { UpdateUserDto } from './update-user.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -9,6 +10,7 @@ export class UserController {
     constructor(private readonly userService:UserService){}
 
     @Get("")
+    //@UseGuards(AuthGuard)
     findAllUsers():any{
         return this.userService.getAllUsersFromdb()
     }
